@@ -1,5 +1,5 @@
 
-Sequencia para criar o projeto cadastro
+Sequencia para criar o projeto
 
 criar o arquivo package
 ### npm init 
