@@ -2,8 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-require('./models/cad');
-const Cad = mongoose.model('Cad');
+require('./models/Usuario');
+const Usuario = mongoose.model('Usuario');
 
 const app = express();
 
@@ -27,14 +27,15 @@ mongoose.connect('mongodb://localhost/cadastroNode', {
 })
 
 app.get('/', (req, res) => {
+    console.log(req.body)
     res.send('teste');
 })
 
-app.get('/cadastros', async (req, res) => {
-    await Cad.find({}).then((cad) => {
+app.get('/usuarios', async (req, res) => {
+    await Usuario.find({}).then((usuario) => {
         return res.json({
             error: false,
-            cad
+            usuario
         });
     }).catch((err) => {
         return res.status(400).json({
@@ -44,14 +45,14 @@ app.get('/cadastros', async (req, res) => {
     });
 });
 
-app.post('/cadastros', async (req, res) => {
+app.post('/usuarios', async (req, res) => {
 
     const dados = {
         "nome": "susana",
         "cpf": "12345678900",
     }
-    Cad.create(req.body, (err) => { //usei pelo insomnia
-    //await Cad.create(dados, (err) => {
+    await Usuario.create(req.body, (err) => { //usei pelo insomnia
+        //await Usuario.create(dados, (err) => {
         if (err) return res.status(400).json({
             error: true,
             message: "Erro: conteudo da pagina nao cadastrado com sucesso"
@@ -59,10 +60,10 @@ app.post('/cadastros', async (req, res) => {
     })
     return res.json({
         error: false,
-        message: "Erro: conteudo da pagina home cadastrado com sucesso"
+        message: "conteudo da pagina cadastrado com sucesso"
     })
 })
 
 app.listen(8080, () => {
-    console.log("servidor iniciado na porta 8080")
+    console.log("servidor iniciado na porta 8080: http://localhost:8080")
 })

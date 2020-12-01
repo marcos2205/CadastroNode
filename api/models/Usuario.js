@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const cad = new Schema({ 
+const usuario = new Schema({ 
     nome: {
         type: String
     },  
@@ -12,4 +12,4 @@ const cad = new Schema({
     timestamps: true,
 });
 
-mongoose.model('Cad', cad);
+mongoose.model('Usuario', usuario);
